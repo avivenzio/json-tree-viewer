@@ -1,0 +1,25 @@
+.node {
+    cursor: pointer;
+}
+.node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+}
+.node text {
+    font: 10px sans-serif;
+}
+.link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1.5px;
+}
+
+#body{
+	border:1px solid red;
+	height: 800px;
+}
+
+body {
+    overflow: hidden;
+}
