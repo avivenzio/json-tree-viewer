@@ -15,11 +15,16 @@
     stroke-width: 1.5px;
 }
 
-#body{
+svg{
+	margin-top:1px;
 	border:1px solid red;
-	height: 800px;
 }
 
 body {
     overflow: hidden;
+    padding-top: 50px;
+}
+
+textarea {
+    resize: none;
 }

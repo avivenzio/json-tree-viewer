@@ -1,14 +1,42 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Jellyfish</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="css/styles.css">
 		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 	</head>
 	<body>
-		
-		<div id="body"></div>
+
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+	      <div class="container-fluid">
+	        <div class="navbar-header">
+	          <a class="navbar-brand" href="#">JSON Tree</a>
+	        </div>
+	      </div>
+	    </nav>
+
+	    <div class="container-fluid">
+	    	<div class="row">
+  				<div class="col-md-2">
+  					<form>
+					  <div class="form-group">
+					    <label for="dataTextbox">Enter JSON String</label>
+					    <textarea class="form-control" id="dataTextbox" rows="5"></textarea>
+					  </div>
+					  <button type="button" id="dataSubmit" class="btn btn-default">Treeify</button>
+					</form>
+  				</div>
+ 				<div class="col-md-10">
+ 					<div id="treeContainer"></div>
+ 				</div>
+			</div>
+	    </div><!-- /.container -->
+
+
 		<script src="js/dataConversion.js"></script>
 		<script src="js/tree.js"></script>
 		<script src="js/app.js"></script>

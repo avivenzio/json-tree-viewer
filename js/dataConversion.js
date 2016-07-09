@@ -37,7 +37,7 @@ DataConversion= (function(){
 	};
 
 	return {
-		//Converts JSON String to Node Object[]
+		//Converts JS Object to Node Object[]
 		//Modified DFS approach
 		toNodes: function(data){
 			var rootNode = new Node("JSON",[], null);
