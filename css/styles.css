@@ -15,6 +15,14 @@
     stroke-width: 1.5px;
 }
 
+.panel-body{
+	font-size:12px;
+}
+
+.panel-body ul{
+	padding-left: 10px;
+}
+
 svg{
 	margin-top:1px;
 	border:1px solid red;
@@ -27,4 +35,19 @@ body {
 
 textarea {
     resize: none;
+}
+
+/*navbar styles */
+.navbar{
+	min-width:30px;
+	background-color:#1E88E5;
+	color:#fff;
+	border: none;
+}
+.navbar h1{
+	font-size:18px;
+}
+
+.navbar i{
+	vertical-align:top;
 }

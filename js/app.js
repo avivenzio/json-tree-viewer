@@ -11,7 +11,7 @@
 
 	// bind event listeners to button click and enter key
 	document.getElementById("dataSubmit").onclick=function(){
-		Tree.setData(DataConversion.toNodes(JSON.parse(this.value)));
+		Tree.setData(DataConversion.toNodes(JSON.parse(document.getElementById("dataTextbox").value)));
 		console.log("click btn");
 	};
 

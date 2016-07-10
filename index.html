@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Jellyfish</title>
+		<title>JSON Treeify</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="css/styles.css">
 		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
@@ -14,7 +14,7 @@
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 	      <div class="container-fluid">
 	        <div class="navbar-header">
-	          <a class="navbar-brand" href="#">JSON Tree</a>
+	          <h1><i class="glyphicon glyphicon-tree-deciduous"></i> JSON Treeify</h1>
 	        </div>
 	      </div>
 	    </nav>
@@ -22,13 +22,29 @@
 	    <div class="container-fluid">
 	    	<div class="row">
   				<div class="col-md-2">
+  				
+  				<br/>
+
   					<form>
 					  <div class="form-group">
 					    <label for="dataTextbox">Enter JSON String</label>
-					    <textarea class="form-control" id="dataTextbox" rows="5"></textarea>
+					    <textarea class="form-control" id="dataTextbox" rows="8"></textarea>
 					  </div>
-					  <button type="button" id="dataSubmit" class="btn btn-default">Treeify</button>
+					  <button type="button" id="dataSubmit" class="btn btn-default"><i class="glyphicon glyphicon-tree-deciduous"></i> Treeify</button>
 					</form>
+					<!-- put some Help Text here below the form -->
+					<br/>
+					<div class="panel panel-default">
+							<div class="panel-heading">Tips</div>
+		 				<div class="panel-body">
+		    				<ul>
+		    						<li> Enter JSON data in text box &amp; hit Treeify </li>
+		    						<li> Click nodes to view properties for that object </li>
+		    						<li> Drag the tree around to change the position </li>
+		    						<li> Use the mouse wheel to zoom in and out </li>
+		    				</ul>
+		  				</div>
+					</div>
   				</div>
  				<div class="col-md-10">
  					<div id="treeContainer"></div>
