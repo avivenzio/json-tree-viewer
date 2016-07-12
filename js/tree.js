@@ -12,7 +12,7 @@ Tree= (function(){
 
 	function createTree(bindDivId, height, width){
 		tree=d3.layout.tree().size([height, width]);
-
+		//tree = d3.layout.tree().nodeSize([10, 30]);
 		diagonal = d3.svg.diagonal()
 		    .projection(function (d) {
     		return [d.x, d.y];//places link in middle of node
@@ -71,7 +71,7 @@ Tree= (function(){
         links = tree.links(nodes);
 
     // Normalize for fixed-depth.
-    nodes.forEach(function (d) {d.y = d.depth * 125;});
+    nodes.forEach(function (d) {d.y = d.depth * 200;});
 
     // Update the nodes…
     var node = svg.selectAll("g.node")
@@ -84,23 +84,23 @@ Tree= (function(){
         .attr("class", "node")
         .attr("transform", function (d) {
         return "translate(" + source.x0 + "," + source.y0 + ")";
-        //return "translate(" + d.x + "," + d.y + ")";
     }).on("click", click);
 
     nodeEnter.append("circle")
-	  .attr("r", 1e-6)
+	  .attr("r", 25)
 	  .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
 
     nodeEnter.append("text")
-	  .attr("x", function(d) { return d.children || d._children ? -13 : 13; })
-	  .attr("dy", ".35em")
-	  .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+	  //.attr("x", function(d) { return d.children || d._children ? -13 : 13; })
+	  //.attr("dy", ".35em")
+	  //.attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+	  .attr("text-anchor", "middle")
 	  .text(function(d) { 
 	  	if(typeof d.value !="object")
 	  		return d.name+"- \n "+d.value
 	  	return d.name;
 	})
-	  .style("fill-opacity", 1e-6);
+	  .style("fill-opacity", 25);
 
     // Transition nodes to their new position.
     var nodeUpdate = node.transition()
@@ -110,7 +110,7 @@ Tree= (function(){
     });
     
     nodeUpdate.select("circle")
-	  .attr("r", 10)
+	  .attr("r", 25)
 	  .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
 
     nodeUpdate.select("text")
@@ -123,9 +123,9 @@ Tree= (function(){
         return "translate(" + source.x + "," + source.y + ")";
     }).remove();
 
-      nodeExit.select("circle").attr("r", 1e-6);
+      nodeExit.select("circle").attr("r", 25);
 
-    nodeExit.select("text").style("fill-opacity", 1e-6);
+    nodeExit.select("text").style("fill-opacity", 25);
 
     // Update the links…
     var link = svg.selectAll("path.link")
