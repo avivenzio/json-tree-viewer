@@ -8,11 +8,23 @@ DataConversion= (function(){
 		this.name=name;
 		this.children=children;
 		this.value=value;
+
+		this.type=setType(value);
+
+		function setType(obj){
+			var type = typeof obj;
+			if(type === 'object' && Array.isArray(obj))
+				type = "array";
+			return type;
+		};
 	};
 
 	function visit(node, parent){
 		visitSet.add(node.data);
 		var newNode= new Node(node.name,[],node.data);
+		//Check type and place non objects as data
+		if(typeof node.data != 'object')
+			newNode.children.push(new Node(node.data,[],node.data));
 		nodeStack.push(newNode);
 		parent.children.push(newNode);
 	};
@@ -21,8 +33,8 @@ DataConversion= (function(){
 	function getUnvisitedProp(obj){
 		if(typeof obj ==='object' && obj!=null){
 			var keylist=Object.keys(obj);
-			if(!Array.isArray(obj) && keylist.length==1 && typeof obj[keylist[0]] !="object")
-				return null;//leaf node
+			//if(!Array.isArray(obj) && keylist.length==1 && typeof obj[keylist[0]] !="object")
+			//	return null;//leaf node
 			for(var i=0; i < keylist.length; i++){
 				var currObj= obj[keylist[i]];
 				if(!visitSet.has(currObj)){

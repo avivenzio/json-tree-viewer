@@ -5,7 +5,9 @@
 
 	//Get Data and set in tree module
 	d3.json("http://swapi.co/api/starships/", function(error, data) {
-		Tree.setData(DataConversion.toNodes(data));
+		var d = DataConversion.toNodes(data);
+		console.log(d);
+		Tree.setData(d);
 	});
 /*** End Auto TEst Code ***/
 

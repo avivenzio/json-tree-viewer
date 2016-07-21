@@ -11,8 +11,8 @@ Tree= (function(){
 	    root;
 
 	function createTree(bindDivId, height, width){
-		tree=d3.layout.tree().size([height, width]);
-		//tree = d3.layout.tree().nodeSize([10, 30]);
+		//tree=d3.layout.tree().size([height, width]);
+		tree = d3.layout.tree().nodeSize([100]);
 		diagonal = d3.svg.diagonal()
 		    .projection(function (d) {
     		return [d.x, d.y];//places link in middle of node
@@ -56,6 +56,24 @@ Tree= (function(){
 	    update(d);
 	}
 
+	function nodeFill(d){
+	  	if(d._children && d._children.length > 0)
+	  		switch(d.type){
+	  			case 'object':
+	  				return '#F44336';
+	  			case 'string':
+	  				return '#EC407A';
+	  			case 'number':
+	  				return '#4CAF50';
+	  			case 'boolean':
+	  				return '#78909C';
+	  			case 'array':
+	  				return '#FFA726';
+	  		}
+	  	else
+	  		return "#fff";
+	}
+
 	//Redraw for zoom
 	function redraw() {
 	  svg.attr("transform",
@@ -71,7 +89,7 @@ Tree= (function(){
         links = tree.links(nodes);
 
     // Normalize for fixed-depth.
-    nodes.forEach(function (d) {d.y = d.depth * 200;});
+    nodes.forEach(function (d) {d.y = d.depth * 175;});
 
     // Update the nodes…
     var node = svg.selectAll("g.node")
@@ -87,8 +105,8 @@ Tree= (function(){
     }).on("click", click);
 
     nodeEnter.append("circle")
-	  .attr("r", 25)
-	  .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+	  .attr("r", 32)
+	  .style("fill",nodeFill);
 
     nodeEnter.append("text")
 	  //.attr("x", function(d) { return d.children || d._children ? -13 : 13; })
@@ -96,11 +114,9 @@ Tree= (function(){
 	  //.attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
 	  .attr("text-anchor", "middle")
 	  .text(function(d) { 
-	  	if(typeof d.value !="object")
-	  		return d.name+"- \n "+d.value
 	  	return d.name;
 	})
-	  .style("fill-opacity", 25);
+	  .style("fill-opacity", 32);
 
     // Transition nodes to their new position.
     var nodeUpdate = node.transition()
@@ -110,8 +126,8 @@ Tree= (function(){
     });
     
     nodeUpdate.select("circle")
-	  .attr("r", 25)
-	  .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+	  .attr("r", 32)
+	  .style("fill",nodeFill);
 
     nodeUpdate.select("text")
         .style("fill-opacity", 1);
@@ -123,9 +139,9 @@ Tree= (function(){
         return "translate(" + source.x + "," + source.y + ")";
     }).remove();
 
-      nodeExit.select("circle").attr("r", 25);
+      nodeExit.select("circle").attr("r", 32);
 
-    nodeExit.select("text").style("fill-opacity", 25);
+    nodeExit.select("text").style("fill-opacity", 32);
 
     // Update the links…
     var link = svg.selectAll("path.link")
@@ -172,4 +188,3 @@ return{
 }	
 
 })();
-
