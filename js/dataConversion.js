@@ -5,20 +5,22 @@ DataConversion= (function(){
 
 	//Define Node Object
 	function Node(name, children, value){
+		//Set object members
 		this.name=name;
 		this.children=children;
 		this.value=value;
-
-		this.type=setType(value);
-
-		function setType(obj){
-			var type = typeof obj;
-			if(type === 'object' && Array.isArray(obj))
-				type = "array";
-			return type;
-		};
+		//Set Node datatype
+		this.setTypeFromValue(value);
 	};
 
+	Node.prototype.setTypeFromValue = function(obj){
+		var type = typeof obj;
+		if(type === 'object' && Array.isArray(obj))
+			type = "array";
+		this.type= type;
+	};
+
+	//create Node object and add to
 	function visit(node, parent){
 		visitSet.add(node.data);
 		var newNode= new Node(node.name,[],node.data);
@@ -33,8 +35,6 @@ DataConversion= (function(){
 	function getUnvisitedProp(obj){
 		if(typeof obj ==='object' && obj!=null){
 			var keylist=Object.keys(obj);
-			//if(!Array.isArray(obj) && keylist.length==1 && typeof obj[keylist[0]] !="object")
-			//	return null;//leaf node
 			for(var i=0; i < keylist.length; i++){
 				var currObj= obj[keylist[i]];
 				if(!visitSet.has(currObj)){

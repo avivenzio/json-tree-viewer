@@ -1,4 +1,5 @@
 (function(){
+	
 /*** Auto Test Code ***/
 	//Create the tree
 	Tree.createTree("treeContainer",600,1100);
@@ -10,17 +11,37 @@
 		Tree.setData(d);
 	});
 /*** End Auto TEst Code ***/
+	
+	// bind event listener to http btn
+	document.getElementById("urlSubmit").onclick=function(){
+		var urlToRequest = document.getElementById("urlTextbox").value;
+	//TODO: validate URL
+
+		d3.json(urlToRequest, function(error, data) {
+			var d = DataConversion.toNodes(data);
+			convertAndSetData(data);
+			console.log(d);
+			Tree.setData(d);
+		});
+
+	};
 
 	// bind event listeners to button click and enter key
 	document.getElementById("dataSubmit").onclick=function(){
-		Tree.setData(DataConversion.toNodes(JSON.parse(document.getElementById("dataTextbox").value)));
+		convertAndSetData(JSON.parse(document.getElementById("dataTextbox").value));
 		console.log("click btn");
 	};
 
 	document.getElementById("dataTextbox").onkeypress=function(e){
 		if (e.keyCode == 13)
-			Tree.setData(DataConversion.toNodes(JSON.parse(this.value)));
+			convertAndSetData(JSON.parse(this.value));
 		console.log("key press" + e.keyCode);
+	};
+
+	//Utility function
+	function convertAndSetData(dataObj){
+		var treeData = DataConversion.toNodes(dataObj);
+		Tree.setData(treeData);
 	};
 
 })();
