@@ -7,7 +7,8 @@
     stroke-width: 1.5px;
 }
 .node text {
-    font: 10px sans-serif;
+    font-size: 10px;
+    font-family: 'Roboto', sans-serif;
 }
 .link {
     fill: none;
@@ -15,12 +16,43 @@
     stroke-width: 1.5px;
 }
 
+/** panel styles **/
 .panel-body{
 	font-size:12px;
 }
 
 .panel-body ul{
 	padding-left: 10px;
+}
+
+/** legend **/
+#legendContainer ul {
+	list-style: none;
+}
+
+.legendCircle {
+	width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 5px;
+}
+
+.objectFill{
+	background-color:#F44336;
+}
+.stringFill{
+	background-color:#EC407A;
+}
+.numberFill{
+	background-color:#4CAF50;
+}
+.booleanFill{
+	background-color:#78909C;
+}
+.arrayFill{
+	background-color:#FFA726;
 }
 
 svg{
@@ -53,3 +85,4 @@ textarea {
 .navbar i{
 	vertical-align:top;
 }
+

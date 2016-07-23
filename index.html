@@ -39,7 +39,7 @@
   					<form>
 					  <div class="form-group">
 					    <label for="dataTextbox">Enter JSON String</label>
-					    <textarea class="form-control" id="dataTextbox" rows="8"></textarea>
+					    <textarea class="form-control" id="dataTextbox" rows="5"></textarea>
 					  </div>
 					  <button type="button" id="dataSubmit" class="btn btn-default"><i class="glyphicon glyphicon-tree-deciduous"></i> Treeify</button>
 					</form>
@@ -54,20 +54,54 @@
 					  <button type="button" id="urlSubmit" class="btn btn-default"><i class="glyphicon glyphicon-tree-deciduous"></i> Treeify</button>
 					</form>
 				</div>
+				
 			  </div>
 					<!-- Help Text -->
 					<br/>
-					<div class="panel panel-default">
-							<div class="panel-heading">Tips</div>
-		 				<div class="panel-body">
-		    				<ul>
-		    						<li> Enter JSON into textbox or URL into HTTP box</li>
-		    						<li> Click nodes to view properties for that object </li>
-		    						<li> Drag the tree around to change the position </li>
-		    						<li> Use the mouse wheel to zoom in and out </li>
-		    				</ul>
-		  				</div>
+
+					<div class="panel-group" id="helpAccordion" role="tablist">
+					  <div class="panel panel-default">
+					    <div class="panel-heading" role="tab" id="tipsHeading">
+					      <h4 class="panel-title">
+					        <a role="button" data-toggle="collapse" data-parent="#helpAccordion" href="#tipsContainer">
+					          Tips
+					        </a>
+					      </h4>
+					    </div>
+					    <div id="tipsContainer" class="panel-collapse collapse in" role="tabpanel">
+					      <div class="panel-body">
+					        <ul>
+	    						<li> Enter JSON into textbox or URL into HTTP box</li>
+	    						<li> Click nodes to view properties for that object </li>
+	    						<li> Drag the tree around to change the position </li>
+	    						<li> Use the mouse wheel to zoom in and out </li>
+	    					</ul>
+					      </div>
+					    </div>
+					  </div>
+					  <div class="panel panel-default">
+					    <div class="panel-heading" role="tab" id="legendHeading">
+					      <h4 class="panel-title">
+					        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#helpAccordion" href="#legendContainer">
+					          Data Types Legend
+					        </a>
+					      </h4>
+					    </div>
+					    <div id="legendContainer" class="panel-collapse collapse" role="tabpanel">
+					      <div class="panel-body">
+					       	<ul>
+	    						<li><span class="legendCircle objectFill"></span> Object </li>
+	    						<li><span class="legendCircle arrayFill"></span> Array </li>
+	    						<li><span class="legendCircle stringFill"></span> String </li>
+	    						<li><span class="legendCircle numberFill"></span> Number </li>
+	    						<li><span class="legendCircle booleanFill"></span> Boolean </li>
+	    					</ul>
+					      </div>
+					    </div>
+					  </div>
+					  
 					</div>
+					
   				</div>
  				<div class="col-md-10">
  					<div id="treeContainer"></div>
