@@ -1,4 +1,4 @@
-Tree= (function(){
+function Tree(){
 	
 	//Init Code
 	var duration = 750,
@@ -10,7 +10,7 @@ Tree= (function(){
 	    svg,
 	    root;
 
-	function createTree(bindDivId, height, width){
+	this.createTree = function(bindDivId, height, width){
 		//tree=d3.layout.tree().size([height, width]);
 		tree = d3.layout.tree().nodeSize([100]);
 		diagonal = d3.svg.diagonal()
@@ -26,7 +26,7 @@ Tree= (function(){
 		zm.translate([350, 20]);
 	}
 
-	function setData(data){
+	this.setData = function(data){
 		root = data;
 	  	root.x0 = 0;
 	  	root.y0 = 0;
@@ -36,13 +36,13 @@ Tree= (function(){
 
 //helper functions:
 	//collapse Function
-	 function collapse(d) {
+	function collapse(d) {
 	    if (d.children) {
-	      d._children = d.children;
-	      d._children.forEach(collapse);
-	      d.children = null;
+	    	d._children = d.children;
+	    	d._children.forEach(collapse);
+	    	d.children = null;
 	    }
-	  }
+	}
 
 	// Toggle children on click.
 	function click(d) {
@@ -84,107 +84,99 @@ Tree= (function(){
 	//update function
 	function update(source) {
 
-    // Compute the new tree layout.
-    var nodes = tree.nodes(root).reverse(),
-        links = tree.links(nodes);
+	    // Compute the new tree layout.
+	    var nodes = tree.nodes(root).reverse(),
+	        links = tree.links(nodes);
 
-    // Normalize for fixed-depth.
-    nodes.forEach(function (d) {d.y = d.depth * 175;});
+	    // Normalize for fixed-depth.
+	    nodes.forEach(function (d) {d.y = d.depth * 175;});
 
-    // Update the nodes…
-    var node = svg.selectAll("g.node")
-        .data(nodes, function (d) {
-        return d.id || (d.id = ++i);
-    });
+	    // Update the nodes…
+	    var node = svg.selectAll("g.node")
+	        .data(nodes, function (d) {
+	        return d.id || (d.id = ++i);
+	    });
 
-    // Enter any new nodes at the parent's previous position.
-    var nodeEnter = node.enter().append("g")
-        .attr("class", "node")
-        .attr("transform", function (d) {
-        return "translate(" + source.x0 + "," + source.y0 + ")";
-    }).on("click", click);
+	    // Enter any new nodes at the parent's previous position.
+	    var nodeEnter = node.enter().append("g")
+	        .attr("class", "node")
+	        .attr("transform", function (d) {
+	        return "translate(" + source.x0 + "," + source.y0 + ")";
+	    }).on("click", click);
 
-    nodeEnter.append("circle")
-	  .attr("r", 32)
-	  .style("fill",nodeFill);
+	    nodeEnter.append("circle")
+		  .attr("r", 32)
+		  .style("fill",nodeFill);
 
-    nodeEnter.append("text")
-	  //.attr("x", function(d) { return d.children || d._children ? -13 : 13; })
-	  //.attr("dy", ".35em")
-	  //.attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-	  .attr("text-anchor", "middle")
-	  .text(function(d) { 
-	  	return d.name;
-	})
-	  .style("fill-opacity", 32);
+	    nodeEnter.append("text")
+		  .attr("text-anchor", "middle")
+		  .text(function(d) { 
+		  	return d.name;
+		})
+		  .style("fill-opacity", 32);
 
-    // Transition nodes to their new position.
-    var nodeUpdate = node.transition()
-        .duration(duration)
-        .attr("transform", function (d) {
-        return "translate(" + d.x + "," + d.y + ")";
-    });
-    
-    nodeUpdate.select("circle")
-	  .attr("r", 32)
-	  .style("fill",nodeFill);
+	    // Transition nodes to their new position.
+	    var nodeUpdate = node.transition()
+	        .duration(duration)
+	        .attr("transform", function (d) {
+	        return "translate(" + d.x + "," + d.y + ")";
+	    });
+	    
+	    nodeUpdate.select("circle")
+		  .attr("r", 32)
+		  .style("fill",nodeFill);
 
-    nodeUpdate.select("text")
-        .style("fill-opacity", 1);
+	    nodeUpdate.select("text")
+	        .style("fill-opacity", 1);
 
-    // Transition exiting nodes to the parent's new position.
-    var nodeExit = node.exit().transition()
-        .duration(duration)
-        .attr("transform", function (d) {
-        return "translate(" + source.x + "," + source.y + ")";
-    }).remove();
+	    // Transition exiting nodes to the parent's new position.
+	    var nodeExit = node.exit().transition()
+	        .duration(duration)
+	        .attr("transform", function (d) {
+	        return "translate(" + source.x + "," + source.y + ")";
+	    }).remove();
 
-      nodeExit.select("circle").attr("r", 32);
+	      nodeExit.select("circle").attr("r", 32);
 
-    nodeExit.select("text").style("fill-opacity", 32);
+	    nodeExit.select("text").style("fill-opacity", 32);
 
-    // Update the links…
-    var link = svg.selectAll("path.link")
-        .data(links, function (d) {
-        return d.target.id;
-    });
+	    // Update the links…
+	    var link = svg.selectAll("path.link")
+	        .data(links, function (d) {
+	        return d.target.id;
+	    });
 
-    // Enter any new links at the parent's previous position.
-    link.enter().insert("path", "g")
-        .attr("class", "link")
-        .attr("x", rectW / 2)
-        .attr("y", rectH / 2)
-        .attr("d", function (d) {
-        var o = {
-            x: source.x0,
-            y: source.y0
-        };
-        return diagonal({source: o,target: o});
-    });
+	    // Enter any new links at the parent's previous position.
+	    link.enter().insert("path", "g")
+	        .attr("class", "link")
+	        .attr("x", rectW / 2)
+	        .attr("y", rectH / 2)
+	        .attr("d", function (d) {
+	        var o = {
+	            x: source.x0,
+	            y: source.y0
+	        };
+	        return diagonal({source: o,target: o});
+	    });
 
-    // Transition links to their new position.
-    link.transition()
-        .duration(duration)
-        .attr("d", diagonal);
+	    // Transition links to their new position.
+	    link.transition()
+	        .duration(duration)
+	        .attr("d", diagonal);
 
-    // Transition exiting nodes to the parent's new position.
-    link.exit().transition()
-        .duration(duration)
-        .attr("d", function (d) {
-        var o = {x: source.x,y: source.y};
-        return diagonal({source: o,target: o});
-    }).remove();
+	    // Transition exiting nodes to the parent's new position.
+	    link.exit().transition()
+	        .duration(duration)
+	        .attr("d", function (d) {
+	        var o = {x: source.x,y: source.y};
+	        return diagonal({source: o,target: o});
+	    }).remove();
 
-    // Stash the old positions for transition.
-    nodes.forEach(function (d) {
-        d.x0 = d.x;
-        d.y0 = d.y;
-    });
-}
+	    // Stash the old positions for transition.
+	    nodes.forEach(function (d) {
+	        d.x0 = d.x;
+	        d.y0 = d.y;
+	    });
+	}
 
-return{
-	createTree:createTree,
-	setData:setData
-}	
-
-})();
+};
