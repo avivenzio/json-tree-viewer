@@ -52,12 +52,11 @@ DataConversion= (function(){
 		//Converts JS Object to Node Object[]
 		//Modified DFS approach
 		toNodes: function(data){
-			var rootNode = new Node("JSON",[], null);
+			var rootNode = new Node("JSON",[], data);
 			var results= rootNode;
 			var objStack = new Array();
 			objStack.push(data);
 			nodeStack.push(rootNode);
-			visit({data:data, name:'root'},rootNode);
 			console.log(data);
 			while(objStack.length>0){
 				var n = objStack[objStack.length-1];

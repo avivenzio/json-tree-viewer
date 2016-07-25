@@ -39,6 +39,24 @@
     margin-left: 5px;
 }
 
+
+/* colored stroke for no children */
+.objectStroke{
+	stroke:#F44336;
+}
+.stringStroke{
+	stroke:#EC407A;
+}
+.numberStroke{
+	stroke:#4CAF50;
+}
+.booleanStroke{
+	stroke:#78909C;
+}
+.arrayStroke{
+	stroke:#FFA726;
+}
+
 .objectFill{
 	background-color:#F44336;
 }
