@@ -39,6 +39,7 @@
 	// //Utility function
 	function convertAndSetData(dataObj){
 	 	var treeData = DataConversion.toNodes(dataObj);
+	 	console.log(treeData);
 	 	mainTree.setData(treeData);
 	 };
 

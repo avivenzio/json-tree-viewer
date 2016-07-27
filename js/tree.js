@@ -20,7 +20,7 @@ function Tree(){
 
 		svg = d3.select("#"+bindDivId).append("svg").attr("width", width).attr("height", height)
 		    .call(zm = d3.behavior.zoom().scaleExtent([1,3]).on("zoom", redraw)).append("g")
-		    .attr("transform", "translate(" + 35 + "," + 20 + ")");
+		    .attr("transform", "translate(" + 400 + "," + 100 + ")");
 
 		//zoom/un zoom
 		zm.translate([350, 20]);
